@@ -1,0 +1,42 @@
+<!-- В качестве образца взят приер https://www.nbrb.by/apihelp/exrates/sample/exratessample.zip -->
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript">
+        var uri = 'https://www.nbrb.by/API/';
+        $(function () {
+          $('#btn').click(function(){
+            getRatesFromDB();
+          });
+        });
+            function getRatesFromDB(){
+              $.ajax({
+                type: "POST",
+                url: 'bank.php',
+                data: 'date='+$('#iDate').val(),
+                success: function(response)
+                {
+                  var jsonData = JSON.parse(response);
+                  $('#res').empty(); // Очистка списка результатов
+                  if(jsonData["error"] !== undefined){ // Сервер возвращает JSON с параметром error в случае ошибки 
+                    $('<li>', { text: "Ошибка: " + jsonData["error"] }).appendTo($('#res')); // Сообщение об ошибке
+                  }
+                  else{
+                    for (rate in jsonData) {
+                      $('<li>', { text: rate + ": " + jsonData[rate] }).appendTo($('#res')); // 
+                    }
+                  }
+                }
+              });
+            }
+    </script></head>
+<body>
+    <span id="onDate" >Дата: <input type="date" id="iDate" /></span> 
+    <input type="button" id="btn" value="Получить курс" />
+    <ul id="res">
+    </ul>
+</body>
+</html>
