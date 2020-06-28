@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `currency` (
   `id` int(11) NOT NULL,
   `nbrb_id` int(11) NOT NULL,
-  `name` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `abbreviation` varchar(10) CHARACTER SET latin1 NOT NULL
+  `name` varchar(100) NOT NULL,
+  `abbreviation` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -39,9 +39,9 @@ CREATE TABLE `currency` (
 --
 
 INSERT INTO `currency` (`id`, `nbrb_id`, `name`, `abbreviation`) VALUES
-(1, 143, 'Pound', 'GBP'),
-(2, 145, 'Dollar', 'USD'),
-(3, 292, 'Euro', 'EUR');
+(1, 143, 'Фунт', 'GBP'),
+(2, 145, 'Доллар', 'USD'),
+(3, 292, 'Евро', 'EUR');
 
 --
 -- Индексы сохранённых таблиц

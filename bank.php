@@ -148,11 +148,6 @@
     }
 
     $db = new DatabaseClass();
-    //print_r($db->getCurrNbrbIds());
-    //$db->getRateFromNbrb('2020-05-03', '143');
-    //echo $db->getRatesFromNbrb('2020-05-03');
-    //print_r($db->getRatesFromDB('2020-02-01'));
-    //print_r($db->getCurrId("292"));
 
     if (isset($_POST['date'])) {
         if(strtotime($_POST['date']) > time()) {
@@ -161,13 +156,7 @@
         else{
             $rates = $db->getRatesFromDB($_POST['date']);
             if(empty($rates)){
-                $rates = $db->getRatesFromDB($_POST['date']);
-                if(empty($rates)){
-                    echo json_encode(array('error' => 'Error while loading exchange rates'));
-                }
-                else{
-                    echo json_encode($rates);
-                }
+                echo json_encode(array('error' => 'Error while loading exchange rates'));
             }
             else{
                 echo json_encode($rates);
